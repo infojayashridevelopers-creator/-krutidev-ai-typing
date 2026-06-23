@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: krutidev-ai-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter          # upgrade to "standard" for more RAM / larger Whisper model
+    healthCheckPath: /api/languages
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: GIN_MODE
+        value: release
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_PATH
+        value: ./krutidev.db
+      - key: WHISPER_MODEL
+        # "tiny"  ~75 MB disk, ~390 MB RAM — fits free/starter tier
+        # "base"  ~142 MB disk, ~500 MB RAM
+        # "small" ~461 MB disk, ~2 GB RAM  — needs standard+ tier
+        value: tiny
+      - key: WHISPER_PATH
+        value: whisper
+      - key: FFMPEG_PATH
+        value: ffmpeg
+      - key: UPLOAD_DIR
+        value: ./uploads
+      - key: DOCUMENTS_DIR
+        value: ./documents

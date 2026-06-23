@@ -1,0 +1,10 @@
+*.exe
+*.exe~
+*.db
+server.log
+out.txt
+err.txt
+test_out.txt
+test_err.txt
+uploads/
+documents/
